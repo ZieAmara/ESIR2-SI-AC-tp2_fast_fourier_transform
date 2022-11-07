@@ -18,7 +18,7 @@ public class FFT_2D {
 		for (int k = 0; k < I.taille(); k++)
 			out.set_line(k,FFT_1D.FFT(out.get_line(k)));
 
-		//on re transpose pour revenir dans le sens de départ
+		//on re transpose pour revenir dans le sens de dÃ©part
 		out.transpose();
 		
 		//on divise par la taille de I
@@ -39,17 +39,17 @@ public class FFT_2D {
 		return out;
 	}
 
-	// compression par mise à zéro des coefficients de fréquence 
+	// compression par mise Ã© zÃ©ro des coefficients de frÃ©quence 
 	// FI contient la TDF de I 
-	// Dans FI on met à zéros tous les coefficients correspondant à des fréquences inférieures à k
+	// Dans FI on met Ã© zÃ©ros tous les coefficients correspondant Ã© des frÃ©quences infÃ©rieures Ã© k
 	public static void compression(CpxImg FI, int k) {
 		// A COMPLETER
 	}
 
 	// compression par seuillage des coefficients faibles
 	// FI contient la TDF de I 
-	// Dans FI on met à zéros tous les coefficients dont le module est inférieur à seuil 
-	// on renvoie le nombre de coefficients conservés 
+	// Dans FI on met Ã© zÃ©ros tous les coefficients dont le module est infÃ©rieur Ã© seuil 
+	// on renvoie le nombre de coefficients conservÃ©s 
 	public static int compression_seuil(CpxImg FI, double seuil){
 		//A COMPLETER
 		return 0;
@@ -61,12 +61,22 @@ public class FFT_2D {
 		try {			
 			//PLACEZ ICI VOS TESTS en 2D
 			//Exemple, lecture
-			BytePixmap BP = new BytePixmap("nomfichier.pgm");
-			CpxImg I = new CpxImg(BP);
+			//BytePixmap BP = new BytePixmap("nomfichier.pgm");
+			//CpxImg I = new CpxImg(BP);
 			
-			//Exemple, écriture
-			BP = I.convert_to_BytePixmap();
-			BP.write("nomfichier2.pgm");
+			//Exemple, Ã©criture
+			//BP = I.convert_to_BytePixmap();
+			//BP.write("nomfichier2.pgm");
+
+				/*exo2 */
+				BytePixmap bp_tigre_512 = new BytePixmap("tigre_512.pgm");	
+				CpxImg I_tigre_512 = new CpxImg(bp_tigre_512);
+				CpxImg fft_tigre_512 = FFT(I_tigre_512);
+				CpxImg fft_inv_tigre_512 = FFT_inverse(fft_tigre_512);
+				BytePixmap bp_tigre = fft_inv_tigre_512.convert_to_BytePixmap();
+				bp_tigre.write("tigre.pgm");
+				//Pixmap("tigre.pgm");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

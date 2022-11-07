@@ -149,85 +149,36 @@ public class FFT_1D {
 	}
 
 	public static void main(String[] args) {
-		double[] t5 = { 1, 2, 3, 4 };
-
-		/* Exo 2: calculez et affichez TFD(1,2,3,4) */
-		// A FAIRE
-		afficher(t5);
-		System.out.println(FFT(t5).toString());
-
-		/* Exo 3: calculez et affichez TFD_inverse(TFD(1,2,3,4)) */
-		// A FAIRE
-		System.out.println(FFT_inverse(FFT(t5)).toString());
-
-		/* Exo 4: multiplication polynomiale, vérification */
-		/* A(X) = 2 et B(X)=-3 */
-		// A FAIRE
-
-		/* A(X) = 2+X et B(X)= -3+2X */
-		// A FAIRE
-
-		/* A(X) = 1 + 2X + 3X^2 + 4X^3 et B(X) = -3 + 2X - 5 X^2 */
-		/*
-		 * System.out.println("-----------------------------------------------------");
-		 * System.out.
-		 * println("   Comparaison des 2 méthodes de multiplications polynomiales");
-		 * double[] t6 = {-3,2,-5,0};
-		 * System.out.println("mult via FFT  --> " + multiplication_polynome_viaFFT(t5,
-		 * t6));
-		 * System.out.print( "mult via coeff -> ");
-		 * afficher(multiplication_polynome_viaCoeff(t5, t6));
-		 */
-
-		/* Exo 5: comparaison des temps de calculs */
-		/*
-		 * // Pour étude du temps de calcul
-		 * int n = 256; // taille des polynômes à multiplier (testez différentes valeurs
-		 * en gardant des puissances de 2)
-		 * 
-		 * System.out.println("Temps de calcul pour n="+n);
-		 * double[] tab1 =random(n),tab2 = random(n);
-		 * long date1, date2;
-		 * date1 = System.currentTimeMillis();
-		 * multiplication_polynome_viaCoeff(tab1, tab2);
-		 * date2 = System.currentTimeMillis();
-		 * System.out.println("   via Coeff: " + (date2 - date1));
-		 * 
-		 * date1 = System.currentTimeMillis();
-		 * multiplication_polynome_viaFFT(tab1, tab2);
-		 * date2 = System.currentTimeMillis();
-		 * System.out.println("   via FFT  : " + (date2 - date1));
-		 */
 		/* PARTI 2 */
 		/* Exo 1: Tests */
-		int n = 16;
-
-		/* TFD d'un vecteur constant a = (a, ..., a) */
-		double k = 5;
-		double[] t6 = new double[n];
-		for (int i = 0; i < n; i++)
-			t6[i] = k;
-		System.out.println(FFT(new CpxTab(t6)).toString());
-
-		/* TFD d'une sinusoïde pure */
-		double[] t7 = new double[n];
-		for (int i = 0; i < n; i++) {
-			t7[i] = Math.cos(2 * Math.PI * k * i / n);
-		}
-		System.out.println(FFT(new CpxTab(t7)).toString());
-
-		/* TFD somme de 2 sinusoïdes pures */
-		double[] t8 = new double[n];
-		for (int i = 0; i < n; i++) {
-			t8[i] = Math.cos(2 * Math.PI * i / n) + 0.5 * Math.cos(2 * Math.PI * 3 * i / n);
-		}
-		System.out.println(FFT(new CpxTab(t8)).toString());
-
-		/* TFD somme de 2 sinusoïdes pures et d'une constante */
-		double[] t9 = new double[n];
-		for (int i = 0; i < n; i++) {
-			t9[i] = 4 + 2 * Math.sin(2 * Math.PI * 2 * i / n) + 0.5 * Math.cos(2 * Math.PI * 7 * i / n);
-		}
-		System.out.println(FFT(new CpxTab(t9)).toString());
+			int n = 16;
+		
+			/* TFD d'un vecteur constant a = (a, ..., a) */
+			double k = 5;
+			double[] t6 = new double[n];
+			for (int i = 0; i < n; i++)
+				t6[i] = k;
+			System.out.println(FFT(new CpxTab(t6)).toString());
+		
+			/* TFD d'une sinusoïde pure */
+			double[] t7 = new double[n];
+			for (int i = 0; i < n; i++) {
+				t7[i] = Math.cos(2 * Math.PI * k * i / n);
+			}
+			System.out.println(FFT(new CpxTab(t7)).toString());
+		
+			/* TFD somme de 2 sinusoïdes pures */
+			double[] t8 = new double[n];
+			for (int i = 0; i < n; i++) {
+				t8[i] = Math.cos(2 * Math.PI * i / n) + 0.5 * Math.cos(2 * Math.PI * 3 * i / n);
+			}
+			System.out.println(FFT(new CpxTab(t8)).toString());
+		
+			/* TFD somme de 2 sinusoïdes pures et d'une constante */
+			double[] t9 = new double[n];
+			for (int i = 0; i < n; i++) {
+				t9[i] = 4 + 2 * Math.sin(2 * Math.PI * 2 * i / n) + 0.5 * Math.cos(2 * Math.PI * 7 * i / n);
+			}
+			System.out.println(FFT(new CpxTab(t9)).toString());
 	}
 }
