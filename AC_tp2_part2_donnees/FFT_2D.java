@@ -69,13 +69,43 @@ public class FFT_2D {
 			//BP.write("nomfichier2.pgm");
 
 				/*exo2 */
-				BytePixmap bp_tigre_512 = new BytePixmap("tigre_512.pgm");	
+				BytePixmap bp_tigre_512 = new BytePixmap("AC_tp2_part2_donnees/tigre_512.pgm");	
 				CpxImg I_tigre_512 = new CpxImg(bp_tigre_512);
 				CpxImg fft_tigre_512 = FFT(I_tigre_512);
 				CpxImg fft_inv_tigre_512 = FFT_inverse(fft_tigre_512);
 				BytePixmap bp_tigre = fft_inv_tigre_512.convert_to_BytePixmap();
-				bp_tigre.write("tigre.pgm");
-				//Pixmap("tigre.pgm");
+				bp_tigre.write("AC_tp2_part2_donnees/tigre.pgm");
+
+				/*exo3 */
+				//mire1
+				BytePixmap bp_mire1 = new BytePixmap("AC_tp2_part2_donnees/mire1.pgm");
+				CpxImg fft_mire1 = FFT(new CpxImg(bp_mire1));
+				bp_mire1 = fft_mire1.convert_to_BytePixmap();
+				bp_mire1.write("AC_tp2_part2_donnees/mire11.pgm");
+				//mire2
+				BytePixmap bp_mire2 = new BytePixmap("AC_tp2_part2_donnees/mire2.pgm");
+				CpxImg fft_mire2 = FFT(new CpxImg(bp_mire2));
+				bp_mire2 = fft_mire2.convert_to_BytePixmap();
+				bp_mire2.write("AC_tp2_part2_donnees/mire22.pgm");
+				//mire3
+				BytePixmap bp_mire3 = new BytePixmap("AC_tp2_part2_donnees/mire3.pgm");
+				CpxImg fft_mire3 = FFT(new CpxImg(bp_mire3));
+				bp_mire3 = fft_mire3.convert_to_BytePixmap();
+				bp_mire3.write("AC_tp2_part2_donnees/mire33.pgm");
+				//fingerprint
+				BytePixmap bp_fingerprint = new BytePixmap("AC_tp2_part2_donnees/fingerprint.pgm");
+				CpxImg fft_fingerprint = FFT(new CpxImg(bp_fingerprint));
+				bp_fingerprint = fft_fingerprint.convert_to_BytePixmap();
+				bp_fingerprint.write("AC_tp2_part2_donnees/fingerprint1.pgm");
+				//barbara
+				BytePixmap bp_barbara_512 = new BytePixmap("AC_tp2_part2_donnees/barbara_512.pgm");
+				CpxImg fft_barbara_512 = FFT(new CpxImg(bp_barbara_512));
+				bp_barbara_512 = fft_barbara_512.convert_to_BytePixmap();
+				bp_barbara_512.write("AC_tp2_part2_donnees/barbara1.pgm");
+
+				/*exo4 */
+				//
+				
 
 		} catch (IOException e) {
 			e.printStackTrace();
