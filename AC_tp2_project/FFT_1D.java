@@ -95,10 +95,13 @@ public class FFT_1D {
 			t1[i] = tab1[i];
 			t2[i] = tab2[i];
 		}
-
-		//A COMPLETER !!
-		
-		return null;
+		CpxTab fft_tab1=FFT(t1);
+		CpxTab fft_tab2=FFT(t2);
+		//On fait la multiplication par point des deux polynomes representés par point
+		CpxTab produit = CpxTab.multiplie(fft_tab1, fft_tab2);
+		CpxTab fft_inv_produit = FFT_inverse(produit);
+		//On retrouve ensuite les coefficients du polynomes produits en faisant la FFT inverse du résultat obtenu
+		return fft_inv_produit;
 	}
 
 	
@@ -147,35 +150,52 @@ public class FFT_1D {
 
 		/* Exo 2: calculez et affichez TFD(1,2,3,4) */
 			//A FAIRE
+			System.out.println("-----------------------------------------------------");
+			System.out.println("calcule et affichage de TFD(1,2,3,4)");
 			afficher(t5);
 			System.out.println(FFT(t5).toString());
 		
 		/* Exo 3: calculez et affichez TFD_inverse(TFD(1,2,3,4)) */
 			//A FAIRE		
+			System.out.println("-----------------------------------------------------");
+			System.out.println("calcule et affichage de TFD_inverse(TFD(1,2,3,4))");
 			System.out.println(FFT_inverse(FFT(t5)).toString());
 
 		/* Exo 4: multiplication polynomiale, vérification*/
 			/* A(X) = 2 et B(X)=-3 */
 			//A FAIRE		
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   Comparaison des 2 méthodes de multiplications polynomiales");
+			double[] t7 = {2};
+			double[] t8 = {-3};
+			System.out.println("mult via FFT  --> " + multiplication_polynome_viaFFT(t7, t8));
+			System.out.print(  "mult via coeff -> ");
+			afficher(multiplication_polynome_viaCoeff(t7, t8));
 
 			/* A(X) = 2+X et B(X)= -3+2X */
-			//A FAIRE					
+			//A FAIRE				
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   Comparaison des 2 méthodes de multiplications polynomiales");
+			double[] t9 = {2, 1};
+			double[] t10 = {-3,2};
+			System.out.println("mult via FFT  --> " + multiplication_polynome_viaFFT(t9, t10));
+			System.out.print(  "mult via coeff -> ");
+			afficher(multiplication_polynome_viaCoeff(t9, t10));
 
-			/* A(X) = 1 + 2X + 3X^2 + 4X^3 et B(X) = -3 + 2X - 5 X^2*/
-	/*
-		System.out.println("-----------------------------------------------------");
-		System.out.println("   Comparaison des 2 méthodes de multiplications polynomiales");
-		double[] t6 = {-3,2,-5,0};
-		System.out.println("mult via FFT  --> " + multiplication_polynome_viaFFT(t5, t6));
-		System.out.print(  "mult via coeff -> ");
-		afficher(multiplication_polynome_viaCoeff(t5, t6));
-	*/
+			/* A(X) = 1 + 2X + 3X^2 + 4X^3 et B(X) = -3 + 2X - 5 X^2*/	
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   Comparaison des 2 méthodes de multiplications polynomiales");
+			double[] t6 = {-3,2,-5,0};
+			System.out.println("mult via FFT  --> " + multiplication_polynome_viaFFT(t5, t6));
+			System.out.print(  "mult via coeff -> ");
+			afficher(multiplication_polynome_viaCoeff(t5, t6));
+	
 
 		/* Exo 5: comparaison des temps de calculs */
-	/*
+	
 		// Pour étude du temps de calcul 
 		int n = 256;  // taille des polynômes à multiplier (testez différentes valeurs en gardant des puissances de 2)
-			
+		System.out.println("-----------------------------------------------------");
 		System.out.println("Temps de calcul pour n="+n);
 		double[] tab1 =random(n),tab2 = random(n);
 		long date1, date2;
@@ -188,8 +208,7 @@ public class FFT_1D {
 		multiplication_polynome_viaFFT(tab1, tab2);
 		date2 = System.currentTimeMillis();
 		System.out.println("   via FFT  : " + (date2 - date1));
-	*/
-
+	
 	}
 
 }
