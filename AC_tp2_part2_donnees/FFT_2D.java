@@ -43,19 +43,43 @@ public class FFT_2D {
 	// FI contient la TDF de I 
 	// Dans FI on met é zéros tous les coefficients correspondant é des fréquences inférieures é k
 	public static void compression(CpxImg FI, int k) {
-		// A COMPLETER
-	}
-
-	// compression par seuillage des coefficients faibles
-	// FI contient la TDF de I 
-	// Dans FI on met é zéros tous les coefficients dont le module est inférieur é seuil 
-	// on renvoie le nombre de coefficients conservés 
-	public static int compression_seuil(CpxImg FI, double seuil){
-		//A COMPLETER
-		return 0;
+		/*exo 5 */
+		int milieu = FI.taille()/2;
+		for(int i=0; i<FI.taille(); i++) {
+			for(int j=0; j<FI.taille(); j++) {
+				if ((i < milieu-k) || (i > milieu+k)) {
+					FI.set_p_reel(i, j, 0);
+					FI.set_p_imag(i, j, 0);
+				}
+				else if((j < milieu-k) || (j > milieu+k)){
+					FI.set_p_reel(i, j, 0);
+					FI.set_p_imag(i, j, 0);
+				}
+			}
+		}		
 	}
 
 	
+
+	// compression par seuillage des coefficients faibles
+	// FI contient la TDF de I 
+	// Dans FI on met � z�ros tous les coefficients dont le module est inf�rieur � seuil 
+	// on renvoie le nombre de coefficients conserv�s 
+	public static int compression_seuil(CpxImg FI, double seuil){
+		/*exo 6 */
+		int k =0;
+		for(int l=0; l<FI.taille(); l++) {
+			for(int m=0; m<FI.taille(); m++) {
+				if (FI.get_p_reel(m, l) < seuil) {
+					k++;
+					FI.set_p_reel(l, m, 0);
+					FI.set_p_imag(l, m, 0);
+				}				
+			}
+		}
+		return k;
+	}
+
 	public static void main(String[] args) {
 		
 		try {			
@@ -68,7 +92,7 @@ public class FFT_2D {
 			//BP = I.convert_to_BytePixmap();
 			//BP.write("nomfichier2.pgm");
 
-				/*exo2 */
+			/*exo 2 */
 				BytePixmap bp_tigre_512 = new BytePixmap("AC_tp2_part2_donnees/tigre_512.pgm");	
 				CpxImg I_tigre_512 = new CpxImg(bp_tigre_512);
 				CpxImg fft_tigre_512 = FFT(I_tigre_512);
@@ -76,7 +100,7 @@ public class FFT_2D {
 				BytePixmap bp_tigre = fft_inv_tigre_512.convert_to_BytePixmap();
 				bp_tigre.write("AC_tp2_part2_donnees/tigre.pgm");
 
-				/*exo3 */
+			/*exo 3 */
 				//mire1
 				BytePixmap bp_mire1 = new BytePixmap("AC_tp2_part2_donnees/mire1.pgm");
 				CpxImg fft_mire1 = FFT(new CpxImg(bp_mire1));
@@ -103,9 +127,27 @@ public class FFT_2D {
 				bp_barbara_512 = fft_barbara_512.convert_to_BytePixmap();
 				bp_barbara_512.write("AC_tp2_part2_donnees/barbara1.pgm");
 
-				/*exo4 */
-				//
-				
+			/*exo 4 */
+				// basse fréquences
+				CpxImg fft_tigre_b = fft_tigre_512;
+				fft_tigre_b.set_p_imag(fft_tigre_512.taille()/2, fft_tigre_512.taille()/2, 0);
+				fft_tigre_b.set_p_reel(fft_tigre_512.taille()/2, fft_tigre_512.taille()/2, 0);
+				bp_tigre = FFT_inverse(fft_tigre_b).convert_to_BytePixmap();
+				bp_tigre.write("AC_tp2_part2_donnees/tigre_basse_fréquence.pgm");
+				// basse fréquences +1
+				CpxImg fft_tigre_b1 = fft_tigre_512;
+				fft_tigre_b1.set_p_imag(fft_tigre_512.taille()/2+1, fft_tigre_512.taille()/2, 0);
+				fft_tigre_b1.set_p_reel(fft_tigre_512.taille()/2+1, fft_tigre_512.taille()/2, 0);
+				bp_tigre = FFT_inverse(fft_tigre_b1).convert_to_BytePixmap();
+				bp_tigre.write("AC_tp2_part2_donnees/tigre_basse1_fréquence.pgm");
+				// haute fréquences
+				CpxImg fft_tigre_h = fft_tigre_512;
+				fft_tigre_h.set_p_imag(fft_tigre_512.taille()-1, fft_tigre_512.taille()-1, 0);
+				fft_tigre_h.set_p_reel(fft_tigre_512.taille()-1, fft_tigre_512.taille()-1, 0);
+				bp_tigre = FFT_inverse(fft_tigre_h).convert_to_BytePixmap();
+				bp_tigre.write("AC_tp2_part2_donnees/tigre_haute_fréquence.pgm");
+
+			/*exo 7 */
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -154,6 +154,8 @@ public class FFT_1D {
 			int n = 16;
 		
 			/* TFD d'un vecteur constant a = (a, ..., a) */
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   TFD d'un vecteur constant a = (a, ..., a)");
 			double k = 5;
 			double[] t6 = new double[n];
 			for (int i = 0; i < n; i++)
@@ -161,6 +163,8 @@ public class FFT_1D {
 			System.out.println(FFT(new CpxTab(t6)).toString());
 		
 			/* TFD d'une sinusoïde pure */
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   TFD d'une sinusoïde pure");
 			double[] t7 = new double[n];
 			for (int i = 0; i < n; i++) {
 				t7[i] = Math.cos(2 * Math.PI * k * i / n);
@@ -168,6 +172,8 @@ public class FFT_1D {
 			System.out.println(FFT(new CpxTab(t7)).toString());
 		
 			/* TFD somme de 2 sinusoïdes pures */
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   TFD somme de 2 sinusoïdes pures");
 			double[] t8 = new double[n];
 			for (int i = 0; i < n; i++) {
 				t8[i] = Math.cos(2 * Math.PI * i / n) + 0.5 * Math.cos(2 * Math.PI * 3 * i / n);
@@ -175,6 +181,8 @@ public class FFT_1D {
 			System.out.println(FFT(new CpxTab(t8)).toString());
 		
 			/* TFD somme de 2 sinusoïdes pures et d'une constante */
+			System.out.println("-----------------------------------------------------");
+			System.out.println("   TFD somme de 2 sinusoïdes pures et d'une constante");
 			double[] t9 = new double[n];
 			for (int i = 0; i < n; i++) {
 				t9[i] = 4 + 2 * Math.sin(2 * Math.PI * 2 * i / n) + 0.5 * Math.cos(2 * Math.PI * 7 * i / n);
