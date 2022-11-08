@@ -77,6 +77,7 @@ public class FFT_2D {
 				}				
 			}
 		}
+		System.out.println(k);
 		return k;
 	}
 
@@ -142,12 +143,25 @@ public class FFT_2D {
 				bp_tigre.write("AC_tp2_part2_donnees/tigre_basse1_fréquence.pgm");
 				// haute fréquences
 				CpxImg fft_tigre_h = fft_tigre_512;
-				fft_tigre_h.set_p_imag(fft_tigre_512.taille()-1, fft_tigre_512.taille()-1, 0);
-				fft_tigre_h.set_p_reel(fft_tigre_512.taille()-1, fft_tigre_512.taille()-1, 0);
+				fft_tigre_h.set_p_imag(fft_tigre_512.taille()/2, fft_tigre_512.taille()-1, 0);
+				fft_tigre_h.set_p_reel(fft_tigre_512.taille()/2, fft_tigre_512.taille()-1, 0);
 				bp_tigre = FFT_inverse(fft_tigre_h).convert_to_BytePixmap();
 				bp_tigre.write("AC_tp2_part2_donnees/tigre_haute_fréquence.pgm");
 
-			/*exo 7 */
+				/*exo 7 */
+				// k = sqrt(0.9/4)*n
+				CpxImg fft_barbara_compression = fft_barbara_512;
+				int k = (int) (fft_barbara_compression.taille()*Math.sqrt(0.9/4));
+				System.out.println(fft_barbara_compression.taille()*fft_barbara_compression.taille()-4*k*k);
+				compression(fft_barbara_compression, k);
+				bp_barbara_512 = FFT_inverse(fft_barbara_compression).convert_to_BytePixmap();
+				bp_barbara_512.write("AC_tp2_part2_donnees/barbara_comprimé.pgm");
+				// compression seuil
+				CpxImg fft_barbara_compression_seuil = fft_barbara_512;
+				double s = -9.915;
+				compression_seuil(fft_barbara_compression_seuil, s);
+				bp_barbara_512 = FFT_inverse(fft_barbara_compression_seuil).convert_to_BytePixmap();
+				bp_barbara_512.write("AC_tp2_part2_donnees/barbara_comprimé_seuil.pgm");
 
 		} catch (IOException e) {
 			e.printStackTrace();
