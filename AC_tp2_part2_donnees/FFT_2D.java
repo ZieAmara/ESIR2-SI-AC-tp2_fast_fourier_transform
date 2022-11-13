@@ -151,7 +151,7 @@ public class FFT_2D {
 				/*exo 7 */
 				// k = sqrt(0.9/4)*n
 				CpxImg fft_barbara_compression = fft_barbara_512;
-				int k = (int) (fft_barbara_compression.taille()*Math.sqrt(0.1/4));
+				int k = (int) (fft_barbara_compression.taille()*Math.sqrt(0.9/4));
 				System.out.println(fft_barbara_compression.taille()*fft_barbara_compression.taille()-4*k*k);
 				compression(fft_barbara_compression, k);
 				bp_barbara_512 = FFT_inverse(fft_barbara_compression).convert_to_BytePixmap();
