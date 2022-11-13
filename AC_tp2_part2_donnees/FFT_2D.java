@@ -9,14 +9,14 @@ public class FFT_2D {
 
 		// FFT 1D sur les lignes
 		for (int k = 0; k < I.taille(); k++)
-			out.set_line(k,FFT_1D.FFT(I.get_line(k)));
+			out.set_line(k,FFT_1D_part2.FFT(I.get_line(k)));
 		  
 		// transposition
 		out.transpose();
 
 		// FFT 1D sur les "nouvelles" lignes de out (anciennes colonnes)
 		for (int k = 0; k < I.taille(); k++)
-			out.set_line(k,FFT_1D.FFT(out.get_line(k)));
+			out.set_line(k,FFT_1D_part2.FFT(out.get_line(k)));
 
 		//on re transpose pour revenir dans le sens de départ
 		out.transpose();
@@ -70,11 +70,11 @@ public class FFT_2D {
 		int k =0;
 		for(int l=0; l<FI.taille(); l++) {
 			for(int m=0; m<FI.taille(); m++) {
-				if (FI.get_p_reel(m, l) < seuil) {
-					k++;
+				if (Math.sqrt(FI.get_p_reel(l, m)*FI.get_p_reel(l, m) + FI.get_p_imag(l, m)*FI.get_p_imag(l, m)) < seuil) {
 					FI.set_p_reel(l, m, 0);
 					FI.set_p_imag(l, m, 0);
-				}				
+				}
+				else k++;		
 			}
 		}
 		System.out.println(k);
@@ -151,14 +151,14 @@ public class FFT_2D {
 				/*exo 7 */
 				// k = sqrt(0.9/4)*n
 				CpxImg fft_barbara_compression = fft_barbara_512;
-				int k = (int) (fft_barbara_compression.taille()*Math.sqrt(0.9/4));
+				int k = (int) (fft_barbara_compression.taille()*Math.sqrt(0.1/4));
 				System.out.println(fft_barbara_compression.taille()*fft_barbara_compression.taille()-4*k*k);
 				compression(fft_barbara_compression, k);
 				bp_barbara_512 = FFT_inverse(fft_barbara_compression).convert_to_BytePixmap();
 				bp_barbara_512.write("AC_tp2_part2_donnees/barbara_comprimé.pgm");
 				// compression seuil
 				CpxImg fft_barbara_compression_seuil = fft_barbara_512;
-				double s = -9.915;
+				double s = 29.9;//-9.915;
 				compression_seuil(fft_barbara_compression_seuil, s);
 				bp_barbara_512 = FFT_inverse(fft_barbara_compression_seuil).convert_to_BytePixmap();
 				bp_barbara_512.write("AC_tp2_part2_donnees/barbara_comprimé_seuil.pgm");
